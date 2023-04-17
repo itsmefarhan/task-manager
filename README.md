@@ -14,6 +14,7 @@ User can:
 - fastapi
 - uvicorn[standard]
 - pymongo
+- fastapi-login
 - python-multipart
 
 ### Environment Variable
