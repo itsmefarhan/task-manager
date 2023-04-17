@@ -4,6 +4,7 @@ from database import task_coll
 from main import manager
 from bson.objectid import ObjectId
 import pymongo
+from datetime import datetime
 
 router = APIRouter()
 
@@ -36,7 +37,7 @@ def delete_task(task_id: str, user=Depends(manager)):
 def update_task(task_id: str, user=Depends(manager)):
     task = task_coll.find_one_and_update(
         {'_id': ObjectId(task_id), 'creator': ObjectId(user['_id'])}, 
-        {'$set':{'completed':True}}
+        {'$set':{'completed':True, 'updated_at': datetime.utcnow()}}
         )
     if task is None:
         return {'error': 'Task not found'}
