@@ -66,7 +66,11 @@ export default function Home({ data, result }) {
 
     const idx = tasks.findIndex((item) => item._id === id);
     const updatedTasks = [...tasks];
-    updatedTasks[idx] = { ...updatedTasks[idx], completed: true };
+    updatedTasks[idx] = {
+      ...updatedTasks[idx],
+      completed: true,
+      updated_at: new Date().toISOString(),
+    };
     setTasks(updatedTasks);
   };
 
