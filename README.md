@@ -3,6 +3,7 @@
 ### Features
 - User registration
 - User login
+
 User can:
 - Create a task
 - Get own tasks
