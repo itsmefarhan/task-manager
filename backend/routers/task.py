@@ -16,7 +16,7 @@ def create_task(task: Task, user=Depends(manager)):
 
 @router.get('/')
 def get_tasks(user=Depends(manager)):
-    res = task_coll.find({'creator': ObjectId(user['_id'])}).sort('created_at', pymongo.DESCENDING)
+    res = task_coll.find({'creator': ObjectId(user['_id'])}).sort('updated_at', pymongo.DESCENDING)
     data = []
     for item in list(res):
         item['_id'] = str(item['_id'])
