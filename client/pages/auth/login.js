@@ -40,7 +40,7 @@ const Login = () => {
       const result = await res.json();
       if (res.ok) {
         Cookie.set("tmToken", result.access_token);
-        Cookie.set("tmUser", JSON.stringify(result.user_id));
+        Cookie.set("tmUser", JSON.stringify(result.uid));
         setErr(null);
         setVal({ email: "", password: "" });
         router.replace("/");
