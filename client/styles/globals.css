@@ -1,0 +1,7 @@
+* {
+  color: rgba(33, 37, 41, 0.75);
+}
+form {
+  max-width: 576px;
+  margin: auto;
+}
