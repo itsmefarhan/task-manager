@@ -1,7 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_login import LoginManager
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
+
+SECRET = os.environ.get('SECRET')
+
+manager = LoginManager(SECRET, '/login')
 
 origins = ['*']
 
