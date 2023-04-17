@@ -23,3 +23,11 @@ def get_tasks(user=Depends(manager)):
         item['creator'] = str(item['creator'])
         data.append(item)
     return data
+
+@router.delete('/{task_id}')
+def delete_task(task_id: str, user=Depends(manager)):    
+    task = task_coll.find_one_and_delete({'_id': ObjectId(task_id), 'creator': ObjectId(user['_id'])})    
+    if task is None:
+        return {'error': 'Task not found'}
+    else:
+        return {'message': 'Task deleted'}
