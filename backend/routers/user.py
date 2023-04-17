@@ -17,7 +17,7 @@ def load_user(email: str):
         return res
 
 @router.post('/register')
-async def register_user(user: User):
+def register_user(user: User):
     user_exists = user_coll.find_one({'email': user.email})
     if user_exists:
         raise HTTPException(status_code=400, detail='User already exists')
@@ -27,7 +27,7 @@ async def register_user(user: User):
         return {'message': 'User successfully registered'}
 
 @router.post('/login')
-async def login_user(data: OAuth2PasswordRequestForm = Depends()):
+def login_user(data: OAuth2PasswordRequestForm = Depends()):
     email = data.username
     password = data.password
 
