@@ -13,6 +13,8 @@ app.add_middleware(
     allow_headers=['*']
 )
 
+from routers import user
 from routers import task
 
+app.include_router(user.router)
 app.include_router(task.router)
