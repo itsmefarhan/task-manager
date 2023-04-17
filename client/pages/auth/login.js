@@ -1,4 +1,3 @@
-import { API_URL } from "@/utils/API_URL";
 import React, { useState } from "react";
 import Link from "next/link";
 import Cookie from "js-cookie";
@@ -33,7 +32,7 @@ const Login = () => {
       fd.append("username", email);
       fd.append("password", password);
 
-      const res = await fetch(`${API_URL}/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         method: "POST",
         body: fd,
       });

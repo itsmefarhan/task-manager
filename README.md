@@ -21,3 +21,6 @@ User can:
 Create **.env** file at the root of **backend** directory and add:
 - MONGO_URI
 - SECRET (enter any value)
+
+### Environment Variable (nextjs)
+- NEXT_PUBLIC_API_URL

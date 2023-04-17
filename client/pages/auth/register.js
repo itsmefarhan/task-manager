@@ -1,4 +1,3 @@
-import { API_URL } from "@/utils/API_URL";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +27,7 @@ const Register = () => {
       return;
     }
     try {
-      const res = await fetch(`${API_URL}/register`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

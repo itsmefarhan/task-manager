@@ -3,7 +3,6 @@ import { parseCookies } from "nookies";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-import { API_URL } from "@/utils/API_URL";
 import { dummyData } from "@/utils/dummyData";
 import Card from "@/components/Card";
 
@@ -34,7 +33,7 @@ export default function Home({ data, result }) {
     }
     setLoading(true);
 
-    const res = await fetch(API_URL, {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +55,7 @@ export default function Home({ data, result }) {
   };
 
   const handleComplete = async (id) => {
-    await fetch(`${API_URL}/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -105,7 +104,7 @@ export const getServerSideProps = async (ctx) => {
   const data = parseCookies(ctx);
 
   if (data.tmToken) {
-    const res = await fetch(API_URL, {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL, {
       headers: {
         Authorization: `Bearer ${data.tmToken}`,
       },
