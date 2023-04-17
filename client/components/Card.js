@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({ item }) => {
+const Card = ({ item, handleComplete }) => {
   return (
     <div className="card mb-3 bg-dark bg-gradient text-white">
       <div className="card-body">
@@ -22,6 +22,7 @@ const Card = ({ item }) => {
             <button
               className="btn btn-sm btn-primary"
               disabled={item.completed}
+              onClick={() => handleComplete(item._id)}
             >
               {item.completed ? "Done" : "Pending"}
             </button>

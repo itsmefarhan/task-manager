@@ -10,6 +10,7 @@ import Card from "@/components/Card";
 export default function Home({ data, result }) {
   const [text, setText] = useState("");
   const [hasMounted, setHasMounted] = useState(false);
+  const [tasks, setTasks] = useState(result);
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -54,6 +55,21 @@ export default function Home({ data, result }) {
     }
   };
 
+  const handleComplete = async (id) => {
+    await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${data.tmToken}`,
+      },
+    });
+
+    const idx = tasks.findIndex((item) => item._id === id);
+    const updatedTasks = [...tasks];
+    updatedTasks[idx] = { ...updatedTasks[idx], completed: true };
+    setTasks(updatedTasks);
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -73,7 +89,9 @@ export default function Home({ data, result }) {
 
         {data.tmToken &&
           hasMounted &&
-          result.map((item) => <Card key={item._id} item={item} />)}
+          tasks.map((item) => (
+            <Card key={item._id} item={item} handleComplete={handleComplete} />
+          ))}
       </div>
     </div>
   );
