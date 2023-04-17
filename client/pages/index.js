@@ -101,7 +101,8 @@ export default function Home({ data, result }) {
           hasMounted &&
           dummyData.map((item) => <Card key={item._id} item={item} />)}
 
-        {data.tmToken &&
+        {tasks.length &&
+          data.tmToken &&
           hasMounted &&
           tasks.map((item) => (
             <Card key={item._id} item={item} handleComplete={handleComplete} />
