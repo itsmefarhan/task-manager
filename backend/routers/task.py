@@ -31,17 +31,18 @@ def get_tasks(user=Depends(manager)):
 @router.delete('/{task_id}')
 def delete_task(task_id: str, user=Depends(manager)):    
     task = task_coll.find_one_and_delete({'_id': ObjectId(task_id), 'creator': ObjectId(user['_id'])})    
+    print(task)
     if task is None:
         return {'error': 'Task not found'}
     else:
-        return {'message': 'Task deleted'}
+        return {'message': 'Task deleted', '_id': str(task['_id'])}
 
 @router.put('/{task_id}')
 def update_task(task_id: str, user=Depends(manager)):
     task = task_coll.find_one_and_update(
         {'_id': ObjectId(task_id), 'creator': ObjectId(user['_id'])}, 
-        {'$set':{'completed':True, 'updated_at': datetime.utcnow()}}
-        )
+        {'$set':{'completed':True, 'updated_at': datetime.now()}}
+        )            
     if task is None:
         return {'error': 'Task not found'}
     else:

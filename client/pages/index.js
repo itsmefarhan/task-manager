@@ -77,6 +77,19 @@ export default function Home({ data, result }) {
     setTasks(updatedTasks);
   };
 
+  const handleDelete = async (id) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${data.tmToken}`,
+      },
+    });
+    if (res.ok) {
+      const filteredTasks = tasks.filter((task) => task._id !== id);
+      setTasks(filteredTasks);
+    }
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -98,7 +111,12 @@ export default function Home({ data, result }) {
           hasMounted &&
           tasks.length > 0 &&
           tasks.map((item) => (
-            <Card key={item._id} item={item} handleComplete={handleComplete} />
+            <Card
+              key={item._id}
+              item={item}
+              handleComplete={handleComplete}
+              handleDelete={handleDelete}
+            />
           ))}
       </div>
     </div>
