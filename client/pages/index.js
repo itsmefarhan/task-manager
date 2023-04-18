@@ -39,7 +39,10 @@ export default function Home({ data, result }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${data.tmToken}`,
       },
-      body: JSON.stringify({ text, creator: data?.tmUser }),
+      body: JSON.stringify({
+        text,
+        creator: data?.tmUser,
+      }),
     });
 
     const result = await res.json();
@@ -103,7 +106,8 @@ export default function Home({ data, result }) {
 
         {data.tmToken &&
           hasMounted &&
-          tasks?.map((item) => (
+          tasks.length > 0 &&
+          tasks.map((item) => (
             <Card key={item._id} item={item} handleComplete={handleComplete} />
           ))}
       </div>

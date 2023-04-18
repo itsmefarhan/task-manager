@@ -9,8 +9,8 @@ from datetime import datetime
 router = APIRouter()
 
 @router.post('/')
-def create_task(task: Task, user=Depends(manager)):    
-    task.creator = ObjectId(user['_id'])
+def create_task(task: Task, user=Depends(manager)):        
+    task.creator = ObjectId(user['_id'])            
     task_coll.insert_one(task.dict())        
 
     return {'message': 'Task successfully created'}
