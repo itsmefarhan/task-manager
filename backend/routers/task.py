@@ -11,9 +11,12 @@ router = APIRouter()
 @router.post('/')
 def create_task(task: Task, user=Depends(manager)):        
     task.creator = ObjectId(user['_id'])            
-    task_coll.insert_one(task.dict())        
-
-    return {'message': 'Task successfully created'}
+    response = task_coll.insert_one(task.dict())        
+    new_record = task_coll.find_one({'_id': ObjectId(response.inserted_id)})
+    new_record['_id'] = str(new_record['_id'])    
+    new_record['creator'] = str(new_record['creator'])    
+    
+    return {'message': 'Task successfully created', "task": new_record}
 
 @router.get('/')
 def get_tasks(user=Depends(manager)):

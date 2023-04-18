@@ -49,17 +49,7 @@ export default function Home({ data, result }) {
     if (res.ok) {
       toast.success(result.message);
       setText("");
-      setTasks((prev) => [
-        {
-          _id: Math.random() * 999999,
-          text,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-          creator: data.tmUser,
-          completed: false,
-        },
-        ...prev,
-      ]);
+      setTasks((prev) => [result.task, ...prev]);
       setLoading(false);
     } else {
       // toast.error()
